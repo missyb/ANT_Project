@@ -1,0 +1,16 @@
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\Debug\ANT_WrappedLib.dll
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\Debug\DSI_CP210xManufacturing_3_1.dll
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\Debug\DSI_SiUSBXp_3_1.dll
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\Debug\demo_net.exe
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\Debug\demo_net.pdb
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\DEMO_NET.csprojResolveAssemblyReference.cache
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\demo_net.exe
+C:\Users\hbowles\Downloads\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\demo_net.pdb
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\ANT_WrappedLib.dll
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\DSI_CP210xManufacturing_3_1.dll
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\DSI_SiUSBXp_3_1.dll
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\demo_net.exe
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\demo_net.pdb
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\DEMO_NET.csprojResolveAssemblyReference.cache
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\demo_net.exe
+C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\DEMO_NET\obj\x86\Debug\demo_net.pdb
