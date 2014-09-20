@@ -55,6 +55,8 @@ namespace ANT_Connection
         static bool bBroadcasting;
         static int iIndex = 0;
 
+        int HR = 0;
+
         //create new connection with unknown device number
         createAntConnection(byte channel, byte devicetype, ushort channelperiod)
         {
@@ -84,7 +86,7 @@ namespace ANT_Connection
         // Initialize demo parameters.
         //
         ////////////////////////////////////////////////////////////////////////////////
-        static void Init()
+        void Init()
         {
             try
             {
@@ -363,7 +365,7 @@ namespace ANT_Connection
         // 
         // response: ANT message
         ////////////////////////////////////////////////////////////////////////////////
-        static void ChannelResponse(ANT_Response response)
+        void ChannelResponse(ANT_Response response)
         {
             try
             {
@@ -468,11 +470,14 @@ namespace ANT_Connection
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_ACKNOWLEDGED_DATA_0x5E:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BURST_DATA_0x5F:
                     {
+                      
+
                         if (bDisplay)
                         {
                             if (response.isExtended()) // Check if we are dealing with an extended message
                             {   
                                 ANT_ChannelID chID = response.getDeviceIDfromExt();    // Channel ID of the device we just received a message from
+                                if (chID.deviceTypeID == 120) this.HR = response.getDataPayload()[7];
                                 Console.Write("Chan ID(" + chID.deviceNumber.ToString() + "," + chID.deviceTypeID.ToString() + "," + chID.transmissionTypeID.ToString() + ") - ");
                             }
                             if (response.responseID == (byte)ANT_ReferenceLibrary.ANTMessageID.BROADCAST_DATA_0x4E 
@@ -484,7 +489,8 @@ namespace ANT_Connection
                             else
                                 Console.Write("Burst(" + response.getBurstSequenceNumber().ToString("X2") + ") Rx:(" + response.antChannel.ToString() + "): ");
 
-                            Console.Write(BitConverter.ToString(response.getDataPayload()) + Environment.NewLine);  // Display data payload
+                            //Console.Write(BitConverter.ToString(response.getDataPayload()) + Environment.NewLine);  // Display data payload
+                            Console.Write("  Heart Rate is: " + this.HR + Environment.NewLine);
                         }
                         else
                         {
