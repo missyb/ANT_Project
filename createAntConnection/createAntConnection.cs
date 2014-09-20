@@ -51,7 +51,7 @@ namespace ANT_Connection
         static ANT_ReferenceLibrary.ChannelType channelType;
         static byte[] txBuffer = { 0, 0, 0, 0, 0, 0, 0, 0 };
         static bool bDone;
-        static bool bDisplay;
+        static bool bDisplay; // turn response output on or off
         static bool bBroadcasting;
         static int iIndex = 0;
 
@@ -84,7 +84,7 @@ namespace ANT_Connection
         // Initialize demo parameters.
         //
         ////////////////////////////////////////////////////////////////////////////////
-        static void Init()
+        void Init()
         {
             try
             {
@@ -363,7 +363,7 @@ namespace ANT_Connection
         // 
         // response: ANT message
         ////////////////////////////////////////////////////////////////////////////////
-        static void ChannelResponse(ANT_Response response)
+        void ChannelResponse(ANT_Response response)
         {
             try
             {

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANT_Managed_Library", "ANT_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "createAntConnection", "createAntConnection\createAntConnection.csproj", "{73A108D9-6E34-4446-A5F4-45365C4390F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntGame", "AntGame\AntGame.csproj", "{93374017-86DE-48FC-85EA-839E2A1E3BC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{73A108D9-6E34-4446-A5F4-45365C4390F8}.Debug|Any CPU.Build.0 = Debug|x86
 		{73A108D9-6E34-4446-A5F4-45365C4390F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73A108D9-6E34-4446-A5F4-45365C4390F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93374017-86DE-48FC-85EA-839E2A1E3BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93374017-86DE-48FC-85EA-839E2A1E3BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93374017-86DE-48FC-85EA-839E2A1E3BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93374017-86DE-48FC-85EA-839E2A1E3BC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
