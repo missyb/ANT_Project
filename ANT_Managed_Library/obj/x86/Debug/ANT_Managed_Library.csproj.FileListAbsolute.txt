@@ -13,3 +13,11 @@ C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\Debug\ANT_NET.pdb
 C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\ANT_Managed_Library\obj\x86\Debug\ANT_Managed_Library.csprojResolveAssemblyReference.cache
 C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\ANT_Managed_Library\obj\x86\Debug\ANT_NET.dll
 C:\Users\hbowles\Desktop\ANT_Windows_Library_Package_v3.2_1\ANT_Managed_Library\obj\x86\Debug\ANT_NET.pdb
+C:\Users\hbowles\ant\Debug\ANT_WrappedLib.dll
+C:\Users\hbowles\ant\Debug\DSI_CP210xManufacturing_3_1.dll
+C:\Users\hbowles\ant\Debug\DSI_SiUSBXp_3_1.dll
+C:\Users\hbowles\ant\Debug\ANT_NET.dll
+C:\Users\hbowles\ant\Debug\ANT_NET.pdb
+C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_Managed_Library.csprojResolveAssemblyReference.cache
+C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_NET.dll
+C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_NET.pdb

@@ -27,19 +27,21 @@ using System.Linq;
 using System.Text;
 using ANT_Managed_Library;
 
-namespace ANT_Console_Demo
+namespace ANT_Connection
 {
-    class demo
+    class createAntConnection
     {
         static readonly byte CHANNEL_TYPE_INVALID = 2;
+        static readonly byte CHANNEL_TYPE_MASTER = 0;
+        static readonly byte CHANNEL_TYPE_SLAVE = 1;
 
-        static readonly byte USER_ANT_CHANNEL = 0;         // ANT Channel to use
-        static readonly ushort USER_DEVICENUM = 0;        // Device number    
-        static readonly byte USER_DEVICETYPE = 0;          // Device type
-        static readonly byte USER_TRANSTYPE = 0;           // Transmission type
+        static byte user_ant_channel;         // ANT Channel to use
+        static ushort user_devicenum;        // Device number    
+        static byte user_devicetype;          // Device type
+        static readonly byte USER_TRANSTYPE = 0;           // Transmission type = 2 way
 
         static readonly byte USER_RADIOFREQ = 0x39;          // RF Frequency + 2400 MHz
-        static readonly ushort USER_CHANNELPERIOD = 8070;  // Channel Period (8192/32768)s period = 4Hz
+        static ushort user_channelperiod;  // Channel Period (8192/32768)s period = 4Hz
 
         static readonly byte[] USER_NETWORK_KEY = { 0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45 };
         static readonly byte USER_NETWORK_NUM = 0;         // The network key is assigned to this network number
@@ -53,35 +55,15 @@ namespace ANT_Console_Demo
         static bool bBroadcasting;
         static int iIndex = 0;
 
-
-        ////////////////////////////////////////////////////////////////////////////////
-        // Main
-        //
-        // Usage:
-        //
-        // c:\demo_net.exe [channel_type]
-        //
-        // ... where
-        // channel_type:  Master = 0, Slave = 1
-        //
-        // ... example
-        //
-        // c:\demo_net.exe 0
-        // 
-        // will connect to an ANT USB stick open a Master channel
-        //
-        // If optional arguements are not supplied, user will 
-        // be prompted to enter these after the program starts
-        //
-        ////////////////////////////////////////////////////////////////////////////////
-        static void Main(string[] args)
+        //create new connection with unknown device number
+        createAntConnection(byte channel, byte devicetype, ushort channelperiod)
         {
-            byte ucChannelType = CHANNEL_TYPE_INVALID;
+            user_ant_channel = channel;
+            user_devicenum = 0;
+            user_devicetype = devicetype;
+            user_channelperiod = channelperiod;
 
-            if (args.Length > 0)
-            {
-                ucChannelType = byte.Parse(args[0]);
-            }
+            byte ucChannelType = CHANNEL_TYPE_SLAVE;
 
             try
             {
@@ -109,7 +91,7 @@ namespace ANT_Console_Demo
                 Console.WriteLine("Attempting to connect to an ANT USB device...");
                 device0 = new ANT_Device();   // Create a device instance using the automatic constructor (automatic detection of USB device number and baud rate)
                 device0.deviceResponse += new ANT_Device.dDeviceResponseHandler(DeviceResponse);    // Add device response function to receive protocol event messages
-                channel0 = device0.getChannel(USER_ANT_CHANNEL);    // Get channel from ANT device
+                channel0 = device0.getChannel(user_ant_channel);    // Get channel from ANT device
                 channel0.channelResponse += new dChannelResponseHandler(ChannelResponse);  // Add channel response function to receive channel event messages
                 Console.WriteLine("Initialization was successful!");
             }
@@ -336,7 +318,7 @@ namespace ANT_Console_Demo
                 throw new Exception("Error assigning channel");
 
             Console.WriteLine("Setting Channel ID...");
-            if (channel0.setChannelID(USER_DEVICENUM, false, USER_DEVICETYPE, USER_TRANSTYPE, 500))  // Not using pairing bit
+            if (channel0.setChannelID(user_devicenum, false, user_devicetype, USER_TRANSTYPE, 500))  // Not using pairing bit
                 Console.WriteLine("Channel ID set");
             else
                 throw new Exception("Error configuring Channel ID");
@@ -348,7 +330,7 @@ namespace ANT_Console_Demo
                 throw new Exception("Error configuring Radio Frequency");
 
             Console.WriteLine("Setting Channel Period...");
-            if (channel0.setChannelPeriod(USER_CHANNELPERIOD, 500))
+            if (channel0.setChannelPeriod(user_channelperiod, 500))
                 Console.WriteLine("Channel Period set");
             else 
                 throw new Exception("Error configuring Channel Period");
@@ -651,6 +633,11 @@ namespace ANT_Console_Demo
 	        Console.WriteLine("U - Request USB Descriptor");
             Console.WriteLine("D - Toggle Display");
             Console.WriteLine("Q - Quit");
+        }
+
+        static void Main(string[] args)
+        {
+            createAntConnection hr = new createAntConnection(0, 120, 8070);
         }
 
     }
