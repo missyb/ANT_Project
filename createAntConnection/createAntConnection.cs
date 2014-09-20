@@ -57,6 +57,7 @@ namespace ANT_Connection
 
         int HR = 0;
 
+
         //create new connection with unknown device number
         createAntConnection(byte channel, byte devicetype, ushort channelperiod)
         {
@@ -469,8 +470,8 @@ namespace ANT_Connection
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BROADCAST_DATA_0x5D:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_ACKNOWLEDGED_DATA_0x5E:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BURST_DATA_0x5F:
+
                     {
-                      
 
                         if (bDisplay)
                         {
