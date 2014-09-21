@@ -51,12 +51,11 @@ namespace ANT_Connection
         static ANT_ReferenceLibrary.ChannelType channelType;
         static byte[] txBuffer = { 0, 0, 0, 0, 0, 0, 0, 0 };
         static bool bDone;
-        static bool bDisplay; // turn response output on or off
+        static bool bDisplay;
         static bool bBroadcasting;
         static int iIndex = 0;
 
-        int HR = 0;
-
+        int HR = 0, pwr = 0, cadence = 0;
 
         //create new connection with unknown device number
         createAntConnection(byte channel, byte devicetype, ushort channelperiod)
@@ -470,15 +469,23 @@ namespace ANT_Connection
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BROADCAST_DATA_0x5D:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_ACKNOWLEDGED_DATA_0x5E:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BURST_DATA_0x5F:
-
                     {
+                      
 
                         if (bDisplay)
                         {
                             if (response.isExtended()) // Check if we are dealing with an extended message
                             {   
                                 ANT_ChannelID chID = response.getDeviceIDfromExt();    // Channel ID of the device we just received a message from
-                                if (chID.deviceTypeID == 120) this.HR = response.getDataPayload()[7];
+                                if (chID.deviceTypeID == 120) this.HR = response.getDataPayload()[7]; // Device type for HR monitor is 120
+                                else if (chID.deviceTypeID == 11)
+                                {
+                                    if (response.getDataPayload()[0] == 10)
+                                    {
+                                        this.pwr = response.getDataPayload()[7];
+                                        this.cadence = response.getDataPayload()[4];
+                                    }
+                                }
                                 Console.Write("Chan ID(" + chID.deviceNumber.ToString() + "," + chID.deviceTypeID.ToString() + "," + chID.transmissionTypeID.ToString() + ") - ");
                             }
                             if (response.responseID == (byte)ANT_ReferenceLibrary.ANTMessageID.BROADCAST_DATA_0x4E 
