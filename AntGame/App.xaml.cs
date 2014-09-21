@@ -13,5 +13,6 @@ namespace AntGame
     /// </summary>
     public partial class App : Application
     {
+        int i;
     }
 }
