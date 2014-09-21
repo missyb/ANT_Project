@@ -27,3 +27,4 @@ C:\Users\hbowles\ant\Debug\ANT_NET.dll
 C:\Users\hbowles\ant\Debug\ANT_NET.pdb
 C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_NET.dll
 C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_NET.pdb
+C:\Users\hbowles\ant\ANT_Managed_Library\obj\x86\Debug\ANT_Managed_Library.csprojResolveAssemblyReference.cache
