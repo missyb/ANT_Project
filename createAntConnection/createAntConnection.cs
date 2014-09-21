@@ -1,4 +1,4 @@
-﻿/*
+/*
 This software is subject to the license described in the License.txt file 
 included with this software distribution. You may not use this file except in compliance 
 with this license.
@@ -25,11 +25,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 using ANT_Managed_Library;
 
 namespace ANT_Connection
 {
-    class createAntConnection
+    public class createAntConnection : INotifyPropertyChanged
     {
         static readonly byte CHANNEL_TYPE_INVALID = 2;
         static readonly byte CHANNEL_TYPE_MASTER = 0;
@@ -51,20 +52,48 @@ namespace ANT_Connection
         static ANT_ReferenceLibrary.ChannelType channelType;
         static byte[] txBuffer = { 0, 0, 0, 0, 0, 0, 0, 0 };
         static bool bDone;
-        static bool bDisplay;
+        static bool bDisplay; // turn response output on or off
         static bool bBroadcasting;
         static int iIndex = 0;
 
-        int HR = 0, pwr = 0, cadence = 0;
+
+        // Tracked properties
+        int pwr = 0, cadence = 0;
+        string _heartrate = string.Empty;
+        public string Heartrate { get { return _heartrate; } set { _heartrate = value; 
+                NotifyPropertyChanged("Heartrate"); } }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        public createAntConnection()
+        {
+            user_ant_channel = 0;
+            user_devicenum = 0;
+            user_devicetype = 0;
+            user_channelperiod = 8087;
+            Heartrate = string.Empty;
+        }
 
         //create new connection with unknown device number
-        createAntConnection(byte channel, byte devicetype, ushort channelperiod)
+        public createAntConnection(byte channel, byte devicetype, ushort channelperiod)
         {
             user_ant_channel = channel;
             user_devicenum = 0;
             user_devicetype = devicetype;
             user_channelperiod = channelperiod;
+            Heartrate = string.Empty;
+        }
 
+        public void openConnection()
+        {
             byte ucChannelType = CHANNEL_TYPE_SLAVE;
 
             try
@@ -74,7 +103,7 @@ namespace ANT_Connection
              }
             catch (Exception ex)
             {
-                Console.WriteLine("Demo failed with exception: \n" + ex.Message);
+                Console.WriteLine("Failed with exception: \n" + ex.Message);
             }
         }
 
@@ -365,7 +394,7 @@ namespace ANT_Connection
         // 
         // response: ANT message
         ////////////////////////////////////////////////////////////////////////////////
-        void ChannelResponse(ANT_Response response)
+        public void ChannelResponse(ANT_Response response)
         {
             try
             {
@@ -469,15 +498,15 @@ namespace ANT_Connection
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BROADCAST_DATA_0x5D:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_ACKNOWLEDGED_DATA_0x5E:
                     case ANT_ReferenceLibrary.ANTMessageID.EXT_BURST_DATA_0x5F:
+
                     {
-                      
 
                         if (bDisplay)
                         {
                             if (response.isExtended()) // Check if we are dealing with an extended message
                             {   
                                 ANT_ChannelID chID = response.getDeviceIDfromExt();    // Channel ID of the device we just received a message from
-                                if (chID.deviceTypeID == 120) this.HR = response.getDataPayload()[7]; // Device type for HR monitor is 120
+                                if (chID.deviceTypeID == 120) this.Heartrate = System.Convert.ToString(response.getDataPayload()[7]); // Device type for HR monitor is 120
                                 else if (chID.deviceTypeID == 11)
                                 {
                                     if (response.getDataPayload()[0] == 10)
@@ -486,6 +515,7 @@ namespace ANT_Connection
                                         this.cadence = response.getDataPayload()[4];
                                     }
                                 }
+                                if (chID.deviceTypeID == 120) this.Heartrate = System.Convert.ToString(response.getDataPayload()[7]);
                                 Console.Write("Chan ID(" + chID.deviceNumber.ToString() + "," + chID.deviceTypeID.ToString() + "," + chID.transmissionTypeID.ToString() + ") - ");
                             }
                             if (response.responseID == (byte)ANT_ReferenceLibrary.ANTMessageID.BROADCAST_DATA_0x4E 
@@ -498,7 +528,7 @@ namespace ANT_Connection
                                 Console.Write("Burst(" + response.getBurstSequenceNumber().ToString("X2") + ") Rx:(" + response.antChannel.ToString() + "): ");
 
                             //Console.Write(BitConverter.ToString(response.getDataPayload()) + Environment.NewLine);  // Display data payload
-                            Console.Write("  Heart Rate is: " + this.HR + Environment.NewLine);
+                            Console.Write("  Heart Rate is: " + this.Heartrate + Environment.NewLine);
                         }
                         else
                         {
@@ -652,6 +682,7 @@ namespace ANT_Connection
         static void Main(string[] args)
         {
             createAntConnection hr = new createAntConnection(0, 120, 8070);
+            hr.openConnection();
         }
 
     }
