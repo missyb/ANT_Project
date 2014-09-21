@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANT_Managed_Library", "ANT_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "createAntConnection", "createAntConnection\createAntConnection.csproj", "{73A108D9-6E34-4446-A5F4-45365C4390F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntGame-2", "AntGame\AntGame-2.csproj", "{93374017-86DE-48FC-85EA-839E2A1E3BC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntGame", "AntGame\AntGame.csproj", "{93374017-86DE-48FC-85EA-839E2A1E3BC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
