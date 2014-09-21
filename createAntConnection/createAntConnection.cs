@@ -58,7 +58,9 @@ namespace ANT_Connection
 
 
         // Tracked properties
+
         int pwr = 0, cadence = 0;
+
         string _heartrate = string.Empty;
         public string Heartrate { get { return _heartrate; } set { _heartrate = value; 
                 NotifyPropertyChanged("Heartrate"); } }
@@ -506,6 +508,7 @@ namespace ANT_Connection
                             if (response.isExtended()) // Check if we are dealing with an extended message
                             {   
                                 ANT_ChannelID chID = response.getDeviceIDfromExt();    // Channel ID of the device we just received a message from
+
                                 if (chID.deviceTypeID == 120) this.Heartrate = System.Convert.ToString(response.getDataPayload()[7]); // Device type for HR monitor is 120
                                 else if (chID.deviceTypeID == 11)
                                 {
@@ -515,6 +518,7 @@ namespace ANT_Connection
                                         this.cadence = response.getDataPayload()[4];
                                     }
                                 }
+
                                 if (chID.deviceTypeID == 120) this.Heartrate = System.Convert.ToString(response.getDataPayload()[7]);
                                 Console.Write("Chan ID(" + chID.deviceNumber.ToString() + "," + chID.deviceTypeID.ToString() + "," + chID.transmissionTypeID.ToString() + ") - ");
                             }
