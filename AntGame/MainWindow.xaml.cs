@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using ANT_Connection;
+using ANT_Managed_Library;
 
 namespace AntGame
 {
@@ -23,7 +26,13 @@ namespace AntGame
         public MainWindow()
         {
             InitializeComponent();
+
+            createAntConnection m = new createAntConnection(0, 120, 8070);
+            this.DataContext = m;
+            m.openConnection();
         }
+
+
     }
 }
 
